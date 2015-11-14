@@ -1,0 +1,17 @@
+---
+layout:     post
+title:      "first blog"
+subtitle:   " \"android Stuy\""
+date:       2015-11-14 16:00:00
+author:     "kenny"
+header-img: "img/post-bg-2015.jpg"
+tags:
+    - android
+---
+
+> “Yeah It's on. ”
+
+# 这是 H1
+# android 学习链接
+
+
