@@ -11,7 +11,22 @@ tags:
 
 > “Yeah It's on. ”
 
-# 这是 H1
-# android 学习链接
+# 对Android开发有用的技术栈（一）架构篇
+
+架构可分为三个主要层次：
+
+展现层
+模型（数据）层
+领域层
+
+
+![java-javascript](/img/eritc.jpg)
+
+
+
+
+
+
+
 
 
