@@ -2,7 +2,7 @@
 layout:     post
 title:      "android 开发规范"
 subtitle:   " \"转载自Keegan小钢\""
-date:       2015-11-14 16:00:00
+date:       2015-11-19 20:00:00
 author:     "Keegan小钢"
 header-img: "img/post-bg-2015.jpg"
 tags:
