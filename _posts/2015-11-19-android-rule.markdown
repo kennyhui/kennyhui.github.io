@@ -21,8 +21,9 @@ tags:
 
 ![Alt text](http://keeganlee.me/android/_image/20150709/tab_size.png)
 
+
 3. 花括号不要单独一行，和它前面的代码同一行。而且，花括号与前面的代码之间用一个空格隔开。
-        
+```        
 public void method() { // Good 
 
 } 
@@ -34,11 +35,11 @@ public void method()
 public void method(){ // Bad
 
 } 
-        
-
+       
+ ```      
 4. 空格的使用
 if、else、for、switch、while等逻辑关键字与后面的语句留一个空格隔开。
---------------------------------------------
+```
 // Good
 if (booleanVariable) {
     // TODO while booleanVariable is true
@@ -52,21 +53,21 @@ if(booleanVariable) {
 }else {
     // TODO else
 }
--
+```
 
 运算符两边各用一个空格隔开。
-
+```
 int result = a + b; //Good, = 和 + 两边各用一个空格隔开
 int result=a+b; //Bad,=和+两边没用空格隔开
-
+```
 
 方法的每个参数之间用一个空格隔开。
 
-
+```
 public void method(String param1, String param2); // Good，param1后面的逗号与String之间隔了一个空格
 method(param1, param2); // Good，方法调用时，param1后面的逗号与param2之间隔了一个空格
 method(param1,param2); // Bad，没有用一个空格隔开
-
+```
 5. 空行的使用
 
 将逻辑相关的代码段用空行隔开，以提高可读性。空行也只空一行，不要空多行。在以下情况需用一个空行：
