@@ -12,7 +12,7 @@ tags:
  > 转载自Keegan小钢
  
 
-# 书写规范
+# android 开发书写规范
 
 1. 编码方式统一用UTF-8. Android Studio默认已是UTF-8，只要不去改动它就可以了。
 ![Alt text](http://keeganlee.me/android/_image/20150709/encodings.png)
@@ -22,7 +22,7 @@ tags:
 ![Alt text](http://keeganlee.me/android/_image/20150709/tab_size.png)
 
 3. 花括号不要单独一行，和它前面的代码同一行。而且，花括号与前面的代码之间用一个空格隔开。
-----------------------------------------------
+        
 public void method() { // Good 
 
 } 
@@ -34,7 +34,7 @@ public void method()
 public void method(){ // Bad
 
 } 
---
+        
 
 4. 空格的使用
 if、else、for、switch、while等逻辑关键字与后面的语句留一个空格隔开。
