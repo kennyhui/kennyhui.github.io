@@ -51,15 +51,15 @@ Shift + Esc: 这个会让编辑器获取焦点，并且顺手帮你把刚刚打�
 Esc: 返回编辑器
 Shift + Esc: 返回编辑器并关闭当前窗口
 
-## 返回上次打开的工具窗口 ## 
+## 返回上次打开的工具窗口 ##
 
 ![Alt text](http://7sbqce.com1.z0.glb.clouddn.com/blog2015-12-11-3.gif "Optional title")
 
 接上面那个功能，如果你Shift + Esc 写了一会儿代码，发现又需要打开刚刚的窗口怎么办？这种场景通常发生在Logcat这个Tol Window上，看完了日志，写代码，写完代码看日志；如何快速切换？
 
-## 快捷键：F12 ## 
+## 快捷键：F12 ##
 
-## 快捷打开窗口 ## 
+## 快捷打开窗口 ##
 ![Alt text](http://7sbqce.com1.z0.glb.clouddn.com/blog2015-12-11-4.gif "Optional title")
 
 有木有发现有的窗口上面有个数字？这样的窗口（工具窗）我们可以快捷打开！
@@ -67,7 +67,7 @@ Shift + Esc: 返回编辑器并关闭当前窗口
 Mac: Cmd + 数字
 windows/Linux: Alt + 数字
 
-## 任意窗口切换 ## 
+## 任意窗口切换 ##
 ![Alt text](http://7sbqce.com1.z0.glb.clouddn.com/blog2015-12-11-5.gif "Optional title")
 
 上面的切换还是无法满足你的要求？记得Mac的Cmd + Tab，Windows的Alt/Win + Tab吗？Android Studio也有这个类似的功能，可以让你切换到任意窗口！
@@ -76,7 +76,7 @@ windows/Linux: Alt + 数字
 
 快捷键：Ctrl + Tab
 
-## 隐藏所有窗口 ## 
+## 隐藏所有窗口 ##
 
 ![Alt text](http://7sbqce.com1.z0.glb.clouddn.com/blog2015-12-11-6.gif "Optional title")
 好了学了那么多打开窗口的技能，如果你想关闭那些乱七八糟的窗口，安安静静写代码应该怎么办？
@@ -85,7 +85,7 @@ Mac: CMD + Shift + F12
 windows/Linux: Ctrl + shift + F12
 如果需要恢复所有窗口，再按一次这个快捷键即可。
 
-## 参数提示 ## 
+## 参数提示 ##
 ![Alt text](http://7sbqce.com1.z0.glb.clouddn.com/blog2015-12-11-7.gif "Optional title")
 
 这个功能估计很多人知道了，但是还是提一下。在自动补全以后，如果某个方法参数超级长，你不知道参数是什么怎么办？可以试试这个。
