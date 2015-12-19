@@ -83,7 +83,7 @@ Win/Linux: ctrl + shift + F7
 
 使用这个快捷键，你想到什么功能，打开它搜索就可以了；打个比方，我想看看Java的for each循环和普通的for循环底层是不是同一个实现;那么我就需要看虚拟机字节码了；我记得有这个功能但是不知道快捷键是啥；OK，<font color="gray">Cmd + shift + A</font>，输入bytecode:
 
-![Alt text](/http://7sbqce.com1.z0.glb.clouddn.com/test/1450323104893.png "Optional title")
+![Alt text](http://7sbqce.com1.z0.glb.clouddn.com/test/1450323104893.png "Optional title")
 
 PS:(我用的Intellij IDEA，Android Studio没有集成bytecode功能，可能搜索不到）
 
