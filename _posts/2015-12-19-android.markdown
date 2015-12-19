@@ -22,17 +22,17 @@ tags:
 
 作为一门静态类型语言，Java是有一定的类型推导能力的；那么你是否经常书写:
 
-1
-2
-String testStr = "testStr";
-List<String> testStrings = new ArrayList<String>();
+1 String testStr = "testStr";
+2 List<String> testStrings = new ArrayList<String>();
 其实大可不必写那些恼火的类型声明的，一看就知道testStr, testStrings就知道是什么类型，再这么干不就是废话么！好在IDEA给了我们这个能力。尝试一下这个快捷键吧，会给你惊喜。
 
 Mac: Cmd + Alt + V
 Win/Linux: Ctrl + Alt + V
 有的童鞋可能会问了：我使用ArrayList, HashMap的时候，习惯类型声明为List,Map等接口，这个自动生成的类型声明还是具体的实现啊，怎么办？这一点IDE已经帮你想到了，试试shift + tab,他会给你一个可以选择的类型列表～
 
-## 自动提取参数 ## 
+## 自动提取参数  ##
+
+
 ![Alt text](http://7xp3xc.com1.z0.glb.clouddn.com/201512-12-2.gif "Optional title")
 
 有时候你正在写一个方法的时候发现。哎哟，这个变量最好是当作参数传递进来啊；要做成这么一件事，你必须把这个方法内部所有使用这个局部变量的地方替换，把所有调用这个函数的地方添加参数，繁琐至极！好了有了这个你可以随便玩了：
@@ -41,7 +41,7 @@ Mac: Cmd + Alt + P
 Win/Linux: Ctrl + Alt + P
 当然，如果你想保留原来的方法，只是搞一个参数不同的方法（重载）出来，可以在弹出的那个对话框里面打勾。
 
-## 自动提取方法 ## 
+## 自动提取方法 ##
 
 ![Alt text](http://7xp3xc.com1.z0.glb.clouddn.com/201512-12-3.gif "Optional title")
 
@@ -56,7 +56,7 @@ Win/Linux: Ctrl + Alt + M
 首先组合键都是Cmd/Ctrl + Alt
 然后提取变量Variable=V，参数Parameters=P，方法Method=M
 
-## 内联变量/参数/方法 ## 
+## 内联变量/参数/方法 ##
 ![Alt text](http://7xp3xc.com1.z0.glb.clouddn.com/201512-12-4.gif "Optional title")
 
 好了学会了上面那几个快捷键，万一玩high了，比如提取了太多的方法，想“弄回去”，该怎么办呢？这个操作叫他Inline..：
@@ -65,7 +65,7 @@ Mac: Cmd + Alt + N
 Win/Linux: Ctrl + Alt + M
 上面那个图只是参考，其实不仅可以作用于变量，还可以是方法/参数，个人觉得方法inline比较有用。
 
-## 万能重构键 ## 
+## 万能重构键 ##
 
 ![Alt text](http://7xp3xc.com1.z0.glb.clouddn.com/201512-12-5.png "Optional title")
 
@@ -79,7 +79,7 @@ Win/Linux: Ctrl + Alt + Shift + T
 
 这个重构菜单每一个功能都可以自己去尝试一下，使用之后不好用你来打我。
 
-## 重命名 ## 
+## 重命名 ##
 
 ![Alt text](http://7xp3xc.com1.z0.glb.clouddn.com/201512-12-6.gif "Optional title")
 
