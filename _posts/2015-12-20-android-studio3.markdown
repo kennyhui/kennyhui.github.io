@@ -6,7 +6,8 @@ date:       2015-12-20 8:00:00
 author:     ""
 header-img: "img/post-bg-2015.jpg"
 tags:
-##     - android
+   - android
+---
 
 
  
