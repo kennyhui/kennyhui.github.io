@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "JavaScript6 新语法，新特性"
-subtitle:   " \"\""
+subtitle:   "ES6"
 date:       2016-04-04 10:00:00
 author:     ""
 header-img: "img/post-bg-2015.jpg"
@@ -81,7 +81,7 @@ ES6是个新东西，兼容性还是个大问题，直接使用肯定是不可�
 
 我还没实际应用，不知道实际兼容效果是否有那么好
 
-babel的官网 https://babeljs.io/
+babel的官网 [https://babeljs.io/](https://babeljs.io/)
 
 babel 示例
 
@@ -99,6 +99,7 @@ babel有gulp插件，下面是个简单的ES6代码转换示例
     $ npm install gulp
     $ npm install --save-dev gulp-babel
     $ npm install --save-dev babel-preset-es2015
+
 （2）测试脚本
 
 用ES6方式写一个测试 a.js
