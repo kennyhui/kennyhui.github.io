@@ -23,9 +23,11 @@ tags:
 ##启动服务器
 
 　　打开命令行，并定位到jenkins.war文件的目录下，然后执行java –jar jenkins.war(需要事先配置好JAVA开发环境)，看到如下图所示，表示启动成功
-![][http://img.blog.csdn.net/20151208103835001]
+
+![http://img.blog.csdn.net/20151208103835001][]
 
 然后打开浏览器输入http://localhost:8080/，就能进入到jenkins面板界面，如下图 
+
 ![][http://img.blog.csdn.net/20151208104146073]
 
 ##插件安装
