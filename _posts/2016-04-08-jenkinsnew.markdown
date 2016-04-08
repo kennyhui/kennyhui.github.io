@@ -11,7 +11,7 @@ tags:
 
 
  
-#新建项目
+# 新建项目
 
 前面，已经介绍了，系统相关配置，接下来就可以开始创建项目了。
 
@@ -22,10 +22,10 @@ tags:
 
 ![](http://img.blog.csdn.net/20151211112209518)
 
-##注意：
+# 注意：
 项目名称不能包含有中文，否则在跑job的时候会出错，所以上图的项目名是错误的，在此修正。
 
-#项目配置
+# 项目配置
 
 1.源码管理
 
@@ -47,7 +47,7 @@ SVN 项目类似，填写SVN Respository URL
 构建触发器配置，这里有四种构建触发器，上图采用的是“Poll SCM”，即按一定规则抓取代码进行构建，H/5 * * * *，表示每五分钟抓取代码，如果代码版本发生改变则触发构建命令。
 其他触发器，可以自行查看配置提示。
 
-##填写注册信息
+# 填写注册信息
 
 然后使用刚才注册的用户登录，”系统管理—>Configure Global Security”到安全管理界面 
 ![](http://img.blog.csdn.net/20151209141912841)
@@ -121,11 +121,14 @@ SVN 项目类似，填写SVN Respository URL
 将刚才的授权策略改为“安全矩阵”，在这个矩阵里，可以指定用户的权限，如上图。
 
 ###注意：
-如果忘记了管理员的密码怎么办呢？这里还有一个补救的办法。打开目录/Users/<用户>/.jenkins/config.xml or c:/<用户>/.jenkins/config.xml 
+如果忘记了管理员的密码怎么办呢？这里还有一个补救的办法。打开目录/Users/<用户>/.jenkins/config.xml or c:/<用户>/.jenkins/config.xml
+
 
 ![](http://img.blog.csdn.net/20151209142755532)
 
+
 删掉上图红色圈圈的部分，即：
+
     <useSecurity>true</useSecurity>
     <authorizationStategy class="hudson.sucrity.FullControlOnceLoggedInAuthorizationStrategy">
         ......
@@ -138,7 +141,7 @@ SVN 项目类似，填写SVN Respository URL
 这样用户权限等于是初始化了，要重新配置。
 
 
-##系统设置
+# 系统设置
 
 “系统管理—>系统设置”，进入到系统设置界面 
 
