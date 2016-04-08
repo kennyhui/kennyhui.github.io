@@ -2,7 +2,7 @@
 layout:     post
 title:      "Jenkins构建Android项目持续集成之创建项目"
 subtitle:   "Jenkins的创建项目"
-date:        2016-04-08 10:00:00
+date:        2016-04-07 12:00:00
 author:     ""
 header-img: "img/post-bg-2015.jpg"
 tags:
