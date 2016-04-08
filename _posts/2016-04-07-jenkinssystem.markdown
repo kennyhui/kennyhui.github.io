@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Jenkins构建Android项目持续集成之系统配置篇 "
+title:      "Jenkins构建Android项目持续集成之系统配置篇"
 subtitle:   "Jenkins的系统配置"
 date:       2016-04-07 10:00:00
 author:     ""

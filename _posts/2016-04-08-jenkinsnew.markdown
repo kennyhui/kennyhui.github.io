@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "Jenkins构建Android项目持续集成之创建项目 "
+title:      "Jenkins构建Android项目持续集成之创建项目"
 subtitle:   "Jenkins的创建项目"
 date:       2016-04-08 09:00:00
 author:     ""
