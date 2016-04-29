@@ -2,7 +2,7 @@
 layout:     post
 title:      "android Fingerprint Authentication"
 subtitle:   "Fingerprint Authentication"
-date:        2016-04-29 12:00:00
+date:        2016-04-28 09:00:00
 author:     ""
 header-img: "img/post-bg-2015.jpg"
 tags:
@@ -24,8 +24,20 @@ If you are testing this feature, follow these steps:
 Install Android SDK Tools Revision 24.3, if you have not done so.
 Enroll a new fingerprint in the emulator by going to Settings > Security > Fingerprint, then follow the enrollment instructions.
 Use an emulator to emulate fingerprint touch events with the following command. Use the same command to emulate fingerprint touch events on the lockscreen or in your app.
-adb -e emu finger touch <finger_id>
-On Windows, you may have to run telnet 127.0.0.1 <emulator-id> followed by finger touch <finger_id>.
+
+    adb -e emu finger touch <finger_id>
+
+ On Windows, you may have to run telnet 127.0.0.1 <emulator-id> followed by finger touch <finger_id>.
 
 ![](img/fingerprint.jpg)
+
+
+Confirm Credential
+Your app can authenticate users based on how recently they last unlocked their device. This feature frees users from having to remember additional app-specific passwords, and avoids the need for you to implement your own authentication user interface. Your app should use this feature in conjunction with a public or secret key implementation for user authentication.
+
+To set the timeout duration for which the same key can be re-used after a user is successfully authenticated, call the new setUserAuthenticationValidityDurationSeconds() method when you set up a KeyGenerator or KeyPairGenerator.
+
+Avoid showing the re-authentication dialog excessively -- your apps should try using the cryptographic object first and if the the timeout expires, use the createConfirmDeviceCredentialIntent() method to re-authenticate the user within your app.
+
+To see an app implementation of this feature, refer to the Confirm Credential sample.
 
