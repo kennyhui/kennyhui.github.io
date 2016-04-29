@@ -29,7 +29,7 @@ Use an emulator to emulate fingerprint touch events with the following command. 
 
  On Windows, you may have to run telnet 127.0.0.1 <emulator-id> followed by finger touch <finger_id>.
 
-![](img/fingerprint.jpg)
+![](/img/fingerprint.jpg)
 
 
 Confirm Credential
