@@ -1,16 +1,19 @@
 ---
 layout:     post
-title:      "android Fingerprint Authentication"
-subtitle:   "Fingerprint Authentication"
-date:        2016-04-28 09:00:00
+title:      "android 面试ListView"
+subtitle:   "android面试"
+date:        2016-06-23 09:00:00
 author:     ""
 header-img: "img/post-bg-android.png"
 tags:
-   - android
+   - android interview
 ---
 
 
-#面试题：如何优化ListView的性能？
+
+
+
+# 面试题：如何优化ListView的性能？
 
 在回答这个问题前，我认为很有必要和大家讲几点和getView相关的问题。我们设置或者优化ListView的性能很多时候都是在getView中完成的，反过来说就是很多性能问题都是由于没有正确使用getView造成的。
 
