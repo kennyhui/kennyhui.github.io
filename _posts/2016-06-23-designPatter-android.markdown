@@ -197,7 +197,7 @@ public class Singleton {
 动物Animal，它有行为move()。有两个实现类cat和dog。为了统一管理和创建我们设计一个工厂模式。 　　同时两个子类有各自的行为，Cat有eatFish()，Dog有eatBone().
 
 
-![][https://camo.githubusercontent.com/477bec5efe95c24ab4709c8108728a500c5b3d0f/687474703a2f2f696d672e626c6f672e6373646e2e6e65742f3230313630363230313431303233333933]
+![](https://camo.githubusercontent.com/477bec5efe95c24ab4709c8108728a500c5b3d0f/687474703a2f2f696d672e626c6f672e6373646e2e6e65742f3230313630363230313431303233333933)
 
 
 Animal接口：

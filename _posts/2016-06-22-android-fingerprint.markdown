@@ -27,7 +27,7 @@ tags:
 首先我们要知道ListView的ItemView有一个复用机制，简单看如下图所示，ListView中有一个RecycleBin类复负回收不可见且可能被再次使用的ItemView，由ScrapView存储。
 
 
-![](http://upload-images.jianshu.io/upload_images/1685558-73c9e629b9b0e273.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![][http://upload-images.jianshu.io/upload_images/1685558-73c9e629b9b0e273.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240］
 
 
 
