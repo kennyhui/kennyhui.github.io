@@ -31,11 +31,16 @@ tags:
 
 
 
-![](/img/view_ignorant.png)
+![](/img/view_Ignorant.png)
+
+
+
 
 ![](/img/view_intercepert.png)
 
-![](/img/interest.png)
+
+
+![](/img/view_interest.png)
 
 
 
