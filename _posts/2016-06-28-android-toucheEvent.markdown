@@ -11,10 +11,10 @@ tags:
 
 
 
-#android 事件分发机制
+## android 事件分发机制
 
 
-#1、基础知识
+# 1、基础知识
 
  (1) 所有 Touch 事件都被封装成了 MotionEvent 对象，包括 Touch 的位置、时间、历史记录以及第几个手指(多指触摸)等。
 
@@ -25,7 +25,7 @@ tags:
 
 
 
-#2、传递流程
+# 2、传递流程
 
 (1) 事件从 Activity.dispatchTouchEvent()开始传递，只要没有被停止或拦截，从最上层的 View(ViewGroup)开始一直往下(子 View)传递。子 View 可以通过 onTouchEvent()对事件进行处理。
 
