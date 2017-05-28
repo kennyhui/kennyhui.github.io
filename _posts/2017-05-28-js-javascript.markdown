@@ -4,7 +4,7 @@ title:      "javascirpt 原型"
 subtitle:   "javascript 深入学习"
 date:        2017-05-28 09:00:00
 author:     ""
-header-img: "img/javascript.png"
+header-img: "img/javascript.jpg"
 tags:
    - javascript
 ---
