@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      "JAVASCRIPT learn"
+title:      "javascirpt 原型"
 subtitle:   "and面试"
 date:        2017-05-28 09:00:00
 author:     ""
