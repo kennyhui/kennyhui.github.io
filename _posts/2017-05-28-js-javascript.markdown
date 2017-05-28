@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      "javascirpt 原型"
-subtitle:   "and面试"
+subtitle:   "javascript 深入学习"
 date:        2017-05-28 09:00:00
 author:     ""
 header-img: "img/post-bg-android.png"
