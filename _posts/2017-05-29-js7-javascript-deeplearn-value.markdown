@@ -11,206 +11,93 @@ tags:
 
 ## 定义
 
-MDN 对闭包的定义为：
+在《JavaScript高级程序设计》第三版 4.1.3，讲到传递参数：
 
-闭包是指那些能够访问自由变量的函数。
-那什么是自由变量呢？
+ECMAScript中所有函数的参数都是按值传递的。
+什么是按值传递呢？
 
-自由变量是指在函数中使用的，但既不是函数参数也不是函数的局部变量的变量。
-由此，我们可以看出闭包共有两部分组成：
+也就是说，把函数外部的值复制给函数内部的参数，就和把值从一个变量复制到另一个变量一样。
 
-闭包 = 函数 + 函数能够访问的自由变量
+## 按值传递
+
+举个简单的例子：
+
+```
+
+var value = 1;
+function foo(v) {
+    v = 2;
+    console.log(v); //2
+}
+foo(value);
+console.log(value) // 1
+
+```
+很好理解，当传递 value 到函数 foo 中，相当于拷贝了一份 value，假设拷贝的这份叫 _value，函数中修改的都是 _value 的值，而不会影响原来的 value 值。
+
+## 引用传递
+
+拷贝虽然很好理解，但是当值是一个复杂的数据结构的时候，拷贝就会产生性能上的问题。
+
+所以还有另一种传递方式叫做按引用传递。
+
+所谓按引用传递，就是传递对象的引用，函数内部对参数的任何改变都会影响该对象的值，因为两者引用的是同一个对象。
+
 举个例子：
 
 ```
 
-var a = 1;
-
-function foo() {
-    console.log(a);
+var obj = {
+    value: 1
+};
+function foo(o) {
+    o.value = 2;
+    console.log(o.value); //2
 }
-
-foo();
-
+foo(obj);
+console.log(obj.value) // 2
 ```
 
+哎，不对啊，连我们的红宝书都说了 ECMAScript 中所有函数的参数都是按值传递的，这怎么能按引用传递成功呢？
 
-foo 函数可以访问变量 a，但是 a 既不是 foo 函数的局部变量，也不是 foo 函数的参数，所以 a 就是自由变量。
+而这究竟是不是引用传递呢？
 
-那么，函数 foo + foo 函数访问的自由变量 a 不就是构成了一个闭包嘛……
 
-还真是这样的！
+## 第三种传递方式
 
-所以在《JavaScript权威指南》中就讲到：从技术的角度讲，所有的JavaScript函数都是闭包。
 
-咦，这怎么跟我们平时看到的讲到的闭包不一样呢！？
+不急，让我们再看个例子：
 
-别着急，这是理论上的闭包，其实还有一个实践角度上的闭包，让我们看看汤姆大叔翻译的关于闭包的文章中的定义：
-
-ECMAScript中，闭包指的是：
-
-1. 从理论角度：所有的函数。因为它们都在创建的时候就将上层上下文的数据保存起来了。哪怕是简单的全局变量也是如此，因为函数中访问全局变量就相当于是在访问自由变量，这个时候使用最外层的作用域。
-2. 从实践角度：以下函数才算是闭包：
-    I. 即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）
-    II. 在代码中引用了自由变量
- 接下来就来讲讲实践上的闭包。
-
-## 分析
-
-让我们先写个例子，例子依然是来自《JavaScript权威指南》，稍微做点改动：
 
 ```
-
-var scope = "global scope";
-function checkscope(){
-    var scope = "local scope";
-    function f(){
-        return scope;
-    }
-    return f;
+var obj = {
+    value: 1
+};
+function foo(o) {
+    o = 2;
+    console.log(o); //2
 }
-
-var foo = checkscope();
-foo();
-```
-首先我们要分析一下这段代码中执行上下文栈和执行上下文的变化情况
-
-另一个与这段代码相似的例子，在《JavaScript深入之执行上下文》中有着非常详细的分析。如果看不懂以下的执行过程，建议先阅读这篇文章。
-
-这里直接给出简要的执行过程：
-
-1. 进入全局代码，创建全局执行上下文，全局执行上下文压入执行上下文栈
-2. 全局执行上下文初始化
-3. 执行 checkscope 函数，创建 checkscope 函数执行上下文，checkscope 执行上下文被压入执行上下文栈
-4. checkscope 执行上下文初始化，创建变量对象、作用域链、this等
-5. checkscope 函数执行完毕，checkscope 执行上下文从执行上下文栈中弹出
-6. 执行 f 函数，创建 f 函数执行上下文，f 执行上下文被压入执行上下文栈
-7. f 执行上下文初始化，创建变量对象、作用域链、this等
-8. f 函数执行完毕，f 函数上下文从执行上下文栈中弹出
-
-
-了解到这个过程，我们应该思考一个问题，那就是：
-
-当 f 函数执行的时候，checkscope 函数上下文已经被销毁了啊(即从执行上下文栈中被弹出)，怎么还会读取到 checkscope 作用域下的 scope 值呢？
-
-以上的代码，要是转换成 PHP，就会报错，因为在 PHP 中，f 函数只能读取到自己作用域和全局作用域里的值，所以读不到 checkscope 下的 scope 值。(这段我问的PHP同事……)
-
-然而 JavaScript 却是可以的！
-
-当我们了解了具体的执行过程后，我们知道 f 执行上下文维护了一个作用域链：
-
-```
-fContext = {
-    Scope: [AO, checkscopeContext.AO, globalContext.VO],
-}
+foo(obj);
+console.log(obj.value) // 1
 ```
 
-对的，就是因为这个作用域链，f 函数依然可以读取到 checkscopeContext.AO 的值，说明当 f 函数引用了 checkscopeContext.AO 中的值的时候，即使 checkscopeContext 被销毁了，但是 JavaScript 依然会让 checkscopeContext.AO 活在内存中，f 函数依然可以通过 f 函数的作用域链找到它，正是因为 JavaScript 做到了这一点，从而实现了闭包这个概念。
+如果 JavaScript 采用的是引用传递，外层的值也会被修改呐，这怎么又没被改呢？所以真的不是引用传递吗？
 
-所以，让我们再看一遍实践角度上闭包的定义：
+这就要讲到其实还有第三种传递方式，叫按共享传递。
 
+而共享传递是指，在传递对象的时候，传递对象的引用的副本。
 
-1. 即使创建它的上下文已经销毁，它仍然存在（比如，内部函数从父函数中返回）
-2. 在代码中引用了自由变量
+注意： 按引用传递是传递对象的引用，而按共享传递是传递对象的引用的副本！
 
-在这里再补充一个《JavaScript权威指南》英文原版对闭包的定义:
+所以修改 o.value，可以通过引用找到原值，但是直接修改 o，并不会修改原值。所以第二个和第三个例子其实都是按共享传递。
 
-This combination of a function object and a scope (a set of variable bindings) in which the function’s variables are resolved is called a closure in the computer science literature.
-闭包在计算机科学中也只是一个普通的概念，大家不要去想得太复杂。
+最后，你可以这样理解：
 
+参数如果是基本类型是按值传递，如果是引用类型按共享传递。
 
-## 必刷题
+但是因为拷贝副本也是一种值的拷贝，所以在高程中也直接认为是按值传递了。
 
-
-接下来，看这道刷题必刷，面试必考的闭包题：
-
+所以，高程，谁叫你是红宝书嘞！
 
 
-````
 
-var data = [];
-
-for (var i = 0; i < 3; i++) {
-  data[i] = function () {
-    console.log(i);
-  };
-}
-
-data[0]();
-data[1]();
-data[2]();
-
-```
-答案是都是 3，让我们分析一下原因：
-
-当执行到 data[0] 函数之前，此时全局上下文的 VO 为：
-
-```
-globalContext = {
-    VO: {
-        data: [...],
-        i: 3
-    }
-}
-```
-
-data[0]Context 的 AO 并没有 i 值，所以会从 globalContext.VO 中查找，i 为 3，所以打印的结果就是 3。
-
-data[1] 和 data[2] 是一样的道理。
-
-所以让我们改成闭包看看：
-
-````
-var data = [];
-
-for (var i = 0; i < 3; i++) {
-  data[i] = (function (i) {
-        return function(){
-            console.log(i);
-        }
-  })(i);
-}
-
-data[0]();
-data[1]();
-data[2]();
-
-```
-
-当执行到 data[0] 函数之前，此时全局上下文的 VO 为：
-
-```
-globalContext = {
-    VO: {
-        data: [...],
-        i: 3
-    }
-}
-```
-跟没改之前一模一样。
-
-
-当执行 data[0] 函数的时候，data[0] 函数的作用域链发生了改变：
-
-```
-data[0]Context = {
-    Scope: [AO, 匿名函数Context.AO globalContext.VO]
-}
-```
-匿名函数执行上下文的AO为：
-
-
-匿名函数Context = {
-    AO: {
-        arguments: {
-            0: 0,
-            length: 1
-        },
-        i: 0
-    }
-}
-
-
-data[0]Context 的 AO 并没有 i 值，所以会沿着作用域链从匿名函数 Context.AO 中查找，这时候就会找 i 为 0，找到了就不会往 globalContext.VO 中查找了，即使 globalContext.VO 也有 i 的值(值为3)，所以打印的结果就是0。
-
-data[1] 和 data[2] 是一样的道理。

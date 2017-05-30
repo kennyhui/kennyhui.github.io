@@ -9,202 +9,230 @@ tags:
    - javascript
 ---
 
-## new
+## 类数组对象
 
-一句话介绍 new:
+所谓的类数组对象:
 
-new 运算符创建一个用户定义的对象类型的实例或具有构造函数的内置对象类型之一
-也许有点难懂，我们在模拟 new 之前，先看看 new 实现了哪些功能。
-
+拥有一个 length 属性和若干索引属性的对象
 举个例子：
 
 ```
-// Otaku 御宅族，简称宅
-function Otaku (name, age) {
-    this.name = name;
-    this.age = age;
+var array = ['name', 'age', 'sex'];
 
-    this.habit = 'Games';
+var arrayLike = {
+    0: 'name',
+    1: 'age',
+    2: 'sex',
+    length: 3
 }
-
-// 因为缺乏锻炼的缘故，身体强度让人担忧
-Otaku.prototype.strength = 60;
-
-Otaku.prototype.sayYourName = function () {
-    console.log('I am ' + this.name);
-}
-
-var person = new Otaku('Kevin', '18');
-
-console.log(person.name) // Kevin
-console.log(person.habit) // Games
-console.log(person.strength) // 60
-
-person.sayYourName(); // I am Kevin
 ```
+即便如此，为什么叫做类数组对象呢？
 
-从这个例子中，我们可以看到，实例 person 可以：
+那让我们从读写、获取长度、遍历三个方面看看这两个对象。
 
-1. 访问到 Otaku 构造函数里的属性
-2. 访问到 Otaku.prototype 中的属性
-接下来，我们可以尝试着模拟一下了。
 
-因为 new 是关键字，所以无法像 bind 函数一样直接覆盖，所以我们写一个函数，命名为 objectFactory，来模拟 new 的效果。用的时候是这样的：
+## 读写
 
 ```
-function Otaku () {
+console.log(array[0]); // name
+console.log(arrayLike[0]); // name
+
+array[0] = 'new name';
+arrayLike[0] = 'new name';
+```
+
+## 长度
+
+```
+console.log(array.length); // 3
+console.log(arrayLike.length); // 3
+```
+## 遍历
+
+```
+for(var i = 0, len = array.length; i < len; i++) {
+   ……
+}
+for(var i = 0, len = arrayLike.length; i < len; i++) {
     ……
 }
-
-// 使用 new
-var person = new Otaku(……);
-// 使用 objectFactory
-var person = objectFactory(Otaku, ……)
-```
-## 初步实现
-
-分析：
-
-因为 new 的结果是一个新对象，所以在模拟实现的时候，我们也要建立一个新对象，假设这个对象叫 obj，因为 obj 会具有 Otaku 构造函数里的属性，想想经典继承的例子，我们可以使用 Otaku.apply(obj, arguments)来给 obj 添加新的属性。
-
-在 JavaScript 深入系列第一篇中，我们便讲了原型与原型链，我们知道实例的 __proto__ 属性会指向构造函数的 prototype，也正是因为建立起这样的关系，实例可以访问原型上的属性。
-
-现在，我们可以尝试着写第一版了：
-
-```
-// 第一版代码
-function objectFactory() {
-
-    var obj = new Object(),
-
-    Constructor = [].shift.call(arguments);
-
-    obj.__proto__ = Constructor.prototype;
-
-    Constructor.apply(obj, arguments);
-
-    return obj;
-
-};
 ```
 
+是不是很像？
 
-在这一版中，我们：
+那类数组对象可以使用数组的方法吗？比如：
 
-1. 用new Object() 的方式新建了一个对象 obj
-2. 取出第一个参数，就是我们要传入的构造函数。此外因为 shift 会修改原数组，所以 arguments 会3. 被去除第一个参数
-4. 将 obj 的原型指向构造函数，这样 obj 就可以访问到构造函数原型中的属性
-使用 apply，改变构造函数 this 的指向到新建的对象，这样 obj 就可以访问到构造函数中的属性
-5. 返回 obj
+```
+arrayLike.push('4');
+```
+
+然而上述代码会报错: arrayLike.push is not a function
+
+所以终归还是类数组呐……
 
 
-原型与原型链，可以看《JavaScript深入之从原型到原型链》
 
-apply，可以看《JavaScript深入之call和apply的模拟实现》
+##调用数组方法
 
-经典继承，可以看《JavaScript深入之继承》
+如果类数组就是任性的想用数组的方法怎么办呢？
 
-复制以下的代码，到浏览器中，我们可以做一下测试：
+既然无法直接调用，我们可以用 Function.call 间接调用：
 
 
 ```
-function Otaku (name, age) {
-    this.name = name;
-    this.age = age;
+var arrayLike = {0: 'name', 1: 'age', 2: 'sex', length: 3 }
 
-    this.habit = 'Games';
+Array.prototype.join.call(arrayLike, '&'); // name&age&sex
+
+Array.prototype.slice.call(arrayLike, 0); // ["name", "age", "sex"] 
+// slice可以做到类数组转数组
+
+Array.prototype.map.call(arrayLike, function(item){
+    return item.toUpperCase();
+}); 
+// ["NAME", "AGE", "SEX"]
+
+```
+
+## 类数组转对象
+
+在上面的例子中已经提到了一种类数组转数组的方法，再补充三个：
+
+```
+var arrayLike = {0: 'name', 1: 'age', 2: 'sex', length: 3 }
+// 1. slice
+Array.prototype.slice.call(arrayLike); // ["name", "age", "sex"] 
+// 2. splice
+Array.prototype.splice.call(arrayLike, 0); // ["name", "age", "sex"] 
+// 3. ES6 Array.from
+Array.from(arrayLike); // ["name", "age", "sex"] 
+// 4. apply
+Array.prototype.concat.apply([], arrayLike)
+
+```
+那么为什么会讲到类数组对象呢？以及类数组有什么应用吗？
+
+要说到类数组对象，Arguments 对象就是一个类数组对象。在客户端 JavaScript 中，一些 DOM 方法(document.getElementsByTagName()等)也返回类数组对象。
+
+
+
+我们可以看到除了类数组的索引属性和length属性之外，还有一个callee属性，接下来我们一个一个介绍。
+
+
+
+## length属性
+
+Arguments对象的length属性，表示实参的长度，举个例子：
+
+```
+function foo(b, c, d){
+    console.log("实参的长度为：" + arguments.length)
 }
 
-Otaku.prototype.strength = 60;
+console.log("形参的长度为：" + foo.length)
 
-Otaku.prototype.sayYourName = function () {
-    console.log('I am ' + this.name);
+foo(1)
+
+// 形参的长度为：3
+// 实参的长度为：1
+
+```
+## callee属性
+
+Arguments 对象的 callee 属性，通过它可以调用函数自身。
+
+讲个闭包经典面试题使用 callee 的解决方法：
+
+```
+var data = [];
+
+for (var i = 0; i < 3; i++) {
+    (data[i] = function () {
+       console.log(arguments.callee.i) 
+    }).i = i;
 }
 
-function objectFactory() {
-    var obj = new Object(),
-    Constructor = [].shift.call(arguments);
-    obj.__proto__ = Constructor.prototype;
-    Constructor.apply(obj, arguments);
-    return obj;
-};
+data[0]();
+data[1]();
+data[2]();
 
-var person = objectFactory(Otaku, 'Kevin', '18')
-
-console.log(person.name) // Kevin
-console.log(person.habit) // Games
-console.log(person.strength) // 60
-
-person.sayYourName(); // I am Kevin
+// 0
+// 1
+// 2
 ```
+接下来讲讲 arguments 对象的几个注意要点：
 
-## 返回值效果实现
-
-
-接下来我们再来看一种情况，假如构造函数有返回值，举个例子：
+## arguments 和对应参数的绑定
 
 ```
-function Otaku (name, age) {
-    this.strength = 60;
-    this.age = age;
+function foo(name, age, sex, hobbit) {
 
-    return {
-        name: name,
-        habit: 'Games'
-    }
+    console.log(name, arguments[0]); // name name
+
+    // 改变形参
+    name = 'new name';
+
+    console.log(name, arguments[0]); // new name new name
+
+    // 改变arguments
+    arguments[1] = 'new age';
+
+    console.log(age, arguments[1]); // new age new age
+
+    // 测试未传入的是否会绑定
+    console.log(sex); // undefined
+
+    sex = 'new sex';
+
+    console.log(sex, arguments[2]); // new sex undefined
+
+    arguments[3] = 'new hobbit';
+
+    console.log(hobbit, arguments[3]); // undefined new hobbit
+
 }
 
-var person = new Otaku('Kevin', '18');
-
-console.log(person.name) // Kevin
-console.log(person.habit) // Games
-console.log(person.strength) // undefined
-console.log(person.age) // undefined
-
+foo('name', 'age')
 ```
 
-在这个例子中，构造函数返回了一个对象，在实例 person 中只能访问返回的对象中的属性。
+传入的参数，实参和 arguments 的值会共享，当没有传入时，实参与 arguments 值不会共享
 
-而且还要注意一点，在这里我们是返回了一个对象，假如我们只是返回一个基本类型的值呢？
+除此之外，以上是在非严格模式下，如果是在严格模式下，实参和 arguments 是不会共享的。
 
-再举个例子：
+## 传递参数
+
+将参数从一个函数传递到另一个函数
 
 ```
-function Otaku (name, age) {
-    this.strength = 60;
-    this.age = age;
-
-    return 'handsome boy';
+// 使用 apply 将 foo 的参数传递给 bar
+function foo() {
+    bar.apply(this, arguments);
+}
+function bar(a, b, c) {
+   console.log(a, b, c);
 }
 
-var person = new Otaku('Kevin', '18');
-
-console.log(person.name) // undefined
-console.log(person.habit) // undefined
-console.log(person.strength) // 60
-console.log(person.age) // 18
+foo(1, 2, 3)
 ```
+## 强大的ES6
 
-结果完全颠倒过来，这次尽管有返回值，但是相当于没有返回值进行处理。
 
-所以我们还需要判断返回的值是不是一个对象，如果是一个对象，我们就返回这个对象，如果没有，我们该返回什么就返回什么。
-
-再来看第二版的代码，也是最后一版的代码：
+使用ES6的 ... 运算符，我们可以轻松转成数组。
 
 ```
-// 第二版的代码
-function objectFactory() {
+function func(...arguments) {
+    console.log(arguments); // [1, 2, 3]
+}
 
-    var obj = new Object(),
-
-    Constructor = [].shift.call(arguments);
-
-    obj.__proto__ = Constructor.prototype;
-
-    var ret = Constructor.apply(obj, arguments);
-
-    return typeof ret === 'object' ? ret : obj;
-
-};
+func(1, 2, 3);
 ```
+## 应用
 
+arguments的应用其实很多，在下个系列，也就是 JavaScript 专题系列中，我们会在 jQuery 的 extend 实现、函数柯里化、递归等场景看见 arguments 的身影。这篇文章就不具体展开了。
+
+如果要总结这些场景的话，暂时能想到的包括：
+
+1. 参数不定长
+2. 函数柯里化
+3. 递归调用
+4. 函数重载
