@@ -609,6 +609,89 @@ class Register {
 
 ### observer模块的修改
 
+由于现在一个key可能对应多个回调操作了，需要对observer进行修改：
+
+```
+
+function observer(obj, k, callback) {
+  //...与前文相同
+  if(now !== old) {
+    callback.forEach((fn) => {
+      fn(old, now)
+    })
+  }
+}
+function observerArray(arr, callback) {
+  //...与前文相同
+  //将原来的callback(old, this, ...arg)替换为
+  callback.forEach((fn) => {
+    fn(old, this, ...arg)
+  })
+}
+
+```
+
+####  绑定模版与数据
+
+
+现在，我们要在解析过程中添加对数据的监视了，还记得之前的parse系列函数吗？
+
+```
+
+onst register = new Register()
+function parseModel(node) {
+  if(node.getAttribute('data-model')) {
+    //...之前逻辑不变
+    register.regist(data, _data.path, function(old, now) {
+      if(node.tagName === 'INPUT') {
+        node.value = now
+      } else {
+        node.innerText = now
+      }
+      //添加console便于调试
+      console.log(`${old} ---> ${now}`)
+    })
+  }
+}
+function parseClass(node) {
+  if(node.getAttribute('data-class')) {
+    //...
+    register.regist(data, _data.path, function(old, now) {
+      node.classList.remove(old)
+      node.classList.add(now)
+      console.log(`${old} ---> ${now}`)
+    })
+  }
+}
+//当列表发生变化时，为了简单直接重新渲染了当前列表
+function parseList(node) {
+  //...
+  register.regist(data, _listData.path, () => {
+    while(node.firstChild) {
+      node.removeChild(node.firstChild)
+    }
+    const _listData = parseData(_list, node)
+    node.appendChild(_item)
+    _listData.data.forEach((_dataItem, index) => {
+      const _copyItem = _item.cloneNode(true)
+      if(node.path) {
+        _copyItem.path = node.path.slice()
+      }
+      if(!_copyItem.path) {
+        _copyItem.path = []
+      }
+      _copyItem.path.push(index)
+      scan(_copyItem)
+      node.insertBefore(_copyItem, _item)
+    })
+    node.removeChild(_item)
+  })
+}
+//当模版解析结束后绑定所有事件
+register.build()
+
+```
+
 
 
 
