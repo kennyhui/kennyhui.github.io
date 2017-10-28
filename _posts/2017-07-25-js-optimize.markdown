@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      "前段优化(1)"
-subtitle:   "前段优化"
+title:      "前端优化(1)"
+subtitle:   "前端优化"
 date:        2017-07-25 10:00:00
 author:     ""
 header-img: "img/post-bg-2015.jpg"
