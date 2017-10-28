@@ -12,7 +12,9 @@ tags:
 
 转到分布式版本控制系统看起来像个令人生畏的任务，但不改变已用的工作流你也可以用上Git带来的收益。团队可以用和Subversion完全不变的方式来开发项目。
 
-![图片]（https://raw.githubusercontent.com/quickhack/translations/master/git-workflows-and-tutorials/images/git-workflow-svn.png）
+
+![Alt text](https://raw.githubusercontent.com/quickhack/translations/master/git-workflows-and-tutorials/images/git-workflow-svn.png)
+
 
 但使用Git加强开发的工作流，Git比SVN有几个优势。首先，每个开发可以有属于自己的整个工程的本地拷贝。隔离的环境让各个开发者的工作和项目的其他部分（修改）独立开来 —— 即自由地提交到自己的本地仓库，先完全忽略上游的开发，直到方便的时候再把修改反馈上去。
 
@@ -116,7 +118,8 @@ git pull --rebase origin master
 
 --rebase选项告诉Git把小红的提交移到同步了中央仓库修改后的master分支的顶部，如下图所示：
 
-![图片](https://raw.githubusercontent.com/quickhack/translations/master/git-workflows-and-tutorials/images/git-workflow-svn-6.png)
+![Alt text](https://raw.githubusercontent.com/quickhack/translations/master/git-workflows-and-tutorials/images/git-workflow-svn-6.png)
+
 
 如果你忘加了这个选项，pull操作仍然可以完成，但每次pull操作要同步中央仓库中别人修改时，提交历史会以一个多余的『合并提交』结尾。对于集中式工作流，最好是使用rebase而不是生成一个合并提交。
 
