@@ -1,4 +1,4 @@
----
+  ---
 layout:     post
 title:      "Javascript原型链"
 subtitle:   "原型链"
